@@ -1,25 +1,30 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import axios from 'axios';
+import Planet from './Planet';
 import './App.css';
 
 class App extends Component {
+  state = {
+    planets: []
+  }
+  componentDidMount() {
+    axios('https://swapi.co/api/planets')
+      .then(resp => {
+        console.log(resp.data.results)
+        let planetArray = resp.data.results.map(planet => (<Planet
+        key={planet.name}
+        climate={planet.climate}
+        name={planet.name}
+        />)
+      )
+      this.setState({planets: planetArray})
+    })
+  }
   render() {
+    console.log(this.state.planets)
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+          {this.state.planets[0] ? this.state.planets : 'you goofed'}
       </div>
     );
   }
