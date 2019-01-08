@@ -1,0 +1,16 @@
+.nav-container {
+  background-color: #dedede;
+  border-bottom: black solid 2px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.nav-link {
+  padding: 3px 10px -3px 10px;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  background-color: #efefef;
+}
