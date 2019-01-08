@@ -24,7 +24,9 @@ class App extends Component {
     console.log(this.state.planets)
     return (
       <div className="App">
-          {this.state.planets[0] ? this.state.planets : 'you goofed'}
+        <div className="container">
+          {this.state.planets[0] ? this.state.planets : '...'}
+        </div>
       </div>
     );
   }

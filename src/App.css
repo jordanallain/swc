@@ -1,6 +1,10 @@
-.App{
+.App {
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+}
+
+.container {
+  margin: 10px 50px;
 }
