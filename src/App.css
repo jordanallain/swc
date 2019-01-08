@@ -5,6 +5,9 @@
   justify-content: center;
 }
 
-.container {
+.planet-container {
+  display: flex;
   margin: 10px 50px;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
