@@ -11,6 +11,11 @@
   text-decoration: none;
 }
 
+.nav-link:visited {
+  color: black;
+}
+
 .nav-link:hover {
-  background-color: #efefef;
+  background-color: black;
+  color: #dedede;
 }
