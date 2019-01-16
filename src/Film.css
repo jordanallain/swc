@@ -8,3 +8,7 @@
   text-align: center;
   width: 150px;
 }
+
+.watched {
+  background-color: red;
+}
