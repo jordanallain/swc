@@ -16,4 +16,4 @@ class Planet extends Component {
   }
 }
 
-export default Planet;
+export default Planet
