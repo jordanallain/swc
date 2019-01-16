@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Planet from './Planet'
+import Film from './Film'
 import './App.css'
 import { Route } from 'react-router-dom'
 import Welcome from './Welcome'
@@ -8,7 +9,8 @@ import Nav from './Nav'
 
 class App extends Component {
   state = {
-    planets: []
+    planets: [],
+    films: []
   }
   toggleVisited = (planet) => {
     const planetArray = this.state.planets.map(plan => plan)
@@ -18,6 +20,14 @@ class App extends Component {
     planetArray[index] = currentPlanet
     this.setState({planets: planetArray})
   }
+  toggleWatched = (film) => {
+    const filmArray = this.state.films.map(movie => movie)
+    const currentFilm = filmArray.find(movie => movie.title === film.props.title)
+    currentFilm.watched = !currentFilm.watched
+    const index = filmArray.indexOf(film)
+    filmArray[index] = currentFilm
+    this.setState({films: filmArray})
+  }
   componentDidMount() {
     axios('https://swapi.co/api/planets')
       .then(resp => {
@@ -25,15 +35,24 @@ class App extends Component {
       )
       this.setState({planets: planetArray})
     })
+    axios('https://swapi.co/api/films')
+      .then(resp => {
+        let filmArray = resp.data.results.map(film => ({title: film.title, episode: film.episode_id, watched: false}))
+        this.setState({films: filmArray})
+      })
   }
   render() {
+    const watchedMovies = this.state.films.filter(movie => movie.watched)
+    console.log(watchedMovies)
     return (
       <div className="App">
         <Nav className="nav"/>
-        <Route exact path='/' component={Welcome} />
+        <Route exact path='/' render={() => (
+            <Welcome watchedMovies={watchedMovies}/>
+          )} />
         <Route path='/planets' render={() => (
           <div className="planet-container">
-            {this.state.planets[0] ? this.state.planets.map((planet) => (
+            {this.state.planets[0] ? this.state.planets.map(planet => (
               <Planet
                 toggleVisited={this.toggleVisited}
                 key={planet.name}
@@ -43,6 +62,17 @@ class App extends Component {
             )) : 'loading...'}
           </div>
           )} />
+        <Route path='/films' render={() => (
+            <div className="film-container">
+              {this.state.films[0] ? this.state.films.map(film => (
+                <Film toggleWatched={this.toggleWatched}
+                  key={film.episode}
+                  episode={film.episode}
+                  title={film.title}
+                  watched={film.watched}/>
+              )) : 'loading...'}
+            </div>
+          )}/>
       </div>
     )
   }
