@@ -1,0 +1,10 @@
+.film {
+  background-color: black;
+  border: solid 2px black;
+  color: white;
+  height: 200px;
+  margin-bottom: 10px;
+  padding: 3px;
+  text-align: center;
+  width: 150px;
+}
