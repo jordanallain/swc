@@ -43,12 +43,15 @@ class App extends Component {
   }
   render() {
     const watchedMovies = this.state.films.filter(movie => movie.watched)
-    console.log(watchedMovies)
+    const visitedPlanets = this.state.planets.filter(plan => plan.visited)
     return (
       <div className="App">
         <Nav className="nav"/>
         <Route exact path='/' render={() => (
-            <Welcome watchedMovies={watchedMovies}/>
+            <Welcome
+              watchedMovies={watchedMovies}
+              visitedPlanets={visitedPlanets}
+              />
           )} />
         <Route path='/planets' render={() => (
           <div className="planet-container">
