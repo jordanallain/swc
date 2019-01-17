@@ -31,7 +31,7 @@ class App extends Component {
   componentDidMount() {
     axios('https://swapi.co/api/planets')
       .then(resp => {
-        let planetArray = resp.data.results.map(planet => ({climate: planet.climate, name:planet.name, visited: false})
+        let planetArray = resp.data.results.map(planet => ({climate: planet.climate, name:planet.name, visited: false, id: planet.url.split('/')[5]})
       )
       this.setState({planets: planetArray})
     })
@@ -53,18 +53,29 @@ class App extends Component {
               visitedPlanets={visitedPlanets}
               />
           )} />
-        <Route path='/planets' render={() => (
+        <Route exact path='/planets' render={({match}) => (
           <div className="planet-container">
             {this.state.planets[0] ? this.state.planets.map(planet => (
               <Planet
+                id={planet.id}
                 toggleVisited={this.toggleVisited}
-                key={planet.name}
+                key={planet.id}
                 name={planet.name}
                 climate={planet.climate}
                 visited={planet.visited}/>
             )) : 'loading...'}
           </div>
           )} />
+        <Route path='/planets/:id' render={({match}) => (
+            <Planet
+              id={match.params.id}
+              toggleVisited={this.toggleVisited}
+              key={match.params.id}
+              name={this.state.planets.find(plan => plan.id === match.params.id).name}
+              climate={this.state.planets.find(plan => plan.id === match.params.id).climate}
+              visited={this.state.planets.find(plan => plan.id === match.params.id).visited}
+            />
+        )} />
         <Route path='/films' render={() => (
             <div className="film-container">
               {this.state.films[0] ? this.state.films.map(film => (
