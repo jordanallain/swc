@@ -38,3 +38,13 @@
 .tropical {
   background-color: #00755e;
 }
+
+a:visited {
+  color: black;
+  text-decoration: none;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
