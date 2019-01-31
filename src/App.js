@@ -54,27 +54,32 @@ class App extends Component {
               />
           )} />
         <Route exact path='/planets' render={({match}) => (
-          <div className="planet-container">
-            {this.state.planets[0] ? this.state.planets.map(planet => (
-              <Planet
-                id={planet.id}
-                toggleVisited={this.toggleVisited}
-                key={planet.id}
-                name={planet.name}
-                climate={planet.climate}
-                visited={planet.visited}/>
-            )) : 'loading...'}
-          </div>
+          <React.Fragment>
+            <h2>Click a Planet to learn more!</h2>
+            <div className="planet-container">
+              {this.state.planets[0] ? this.state.planets.map(planet => (
+                <Planet
+                  id={planet.id}
+                  toggleVisited={this.toggleVisited}
+                  key={planet.id}
+                  name={planet.name}
+                  climate={planet.climate}
+                  visited={planet.visited}/>
+              )) : 'loading...'}
+            </div>
+          </React.Fragment>
           )} />
         <Route path='/planets/:id' render={({match}) => (
-            <Planet
-              id={match.params.id}
-              toggleVisited={this.toggleVisited}
-              key={match.params.id}
-              name={this.state.planets.find(plan => plan.id === match.params.id).name}
-              climate={this.state.planets.find(plan => plan.id === match.params.id).climate}
-              visited={this.state.planets.find(plan => plan.id === match.params.id).visited}
-            />
+            <React.Fragment>
+              <Planet
+                id={match.params.id}
+                toggleVisited={this.toggleVisited}
+                key={match.params.id}
+                name={this.state.planets.find(plan => plan.id === match.params.id).name}
+                climate={this.state.planets.find(plan => plan.id === match.params.id).climate}
+                visited={this.state.planets.find(plan => plan.id === match.params.id).visited}
+              />
+            </React.Fragment>
         )} />
         <Route path='/films' render={() => (
             <div className="film-container">
