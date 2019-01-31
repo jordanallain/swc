@@ -1,7 +1,12 @@
 .App {
   align-items: center;
+  background: url('./space.jpg') no-repeat;
+  background-position: center center;
+  background-size: cover;
+  color: white;
   display: flex;
   flex-direction: column;
+  height: 100%;
   justify-content: center;
 }
 
