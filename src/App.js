@@ -6,6 +6,7 @@ import './App.css'
 import { Route } from 'react-router-dom'
 import Welcome from './Welcome'
 import Nav from './Nav'
+import Favorite from './Favorite'
 
 class App extends Component {
   state = {
@@ -92,6 +93,7 @@ class App extends Component {
               )) : 'loading...'}
             </div>
           )}/>
+        <Favorite></Favorite>
       </div>
     )
   }
